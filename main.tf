@@ -3,7 +3,7 @@
   display_name = "Custom SA for VM Instance"
 }
 
-resource "google_compute_instance" "default" {
+resource "google_compute_instance" "cks-master" {
   name         = "cks-master"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
@@ -45,7 +45,7 @@ resource "google_compute_instance" "default" {
   }
 }
 
-resource "google_compute_instance" "default" {
+resource "google_compute_instance" "cks-worker" {
   name         = "cks-worker"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
