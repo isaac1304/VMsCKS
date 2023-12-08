@@ -1,9 +1,4 @@
-﻿resource "google_service_account" "default" {
-  account_id   = "338642376-compute"
-  display_name = "Custom SA for VM Instance"
-}
-
-resource "google_compute_instance" "cks-master" {
+﻿resource "google_compute_instance" "cks-master" {
   name         = "cks-master"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
@@ -13,15 +8,11 @@ resource "google_compute_instance" "cks-master" {
   boot_disk {
     initialize_params {
       image = "ubuntu-2004-focal-v20220419"
+      size = "50"
       labels = {
         my_label = "value"
       }
     }
-  }
-
-  // Local SSD disk
-  scratch_disk {
-    interface = "NVME"
   }
 
   network_interface {
@@ -40,7 +31,7 @@ resource "google_compute_instance" "cks-master" {
 
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = google_service_account.default.email
+    email  = "cks-testvms@tidy-simplicity-359100.iam.gserviceaccount.com"
     scopes = ["cloud-platform"]
   }
 }
@@ -55,15 +46,11 @@ resource "google_compute_instance" "cks-worker" {
   boot_disk {
     initialize_params {
       image = "ubuntu-2004-focal-v20220419"
+      size = "50"
       labels = {
         my_label = "value"
       }
     }
-  }
-
-  // Local SSD disk
-  scratch_disk {
-    interface = "NVME"
   }
 
   network_interface {
@@ -82,7 +69,7 @@ resource "google_compute_instance" "cks-worker" {
 
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = google_service_account.default.email
+    email  = "cks-testvms@tidy-simplicity-359100.iam.gserviceaccount.com"
     scopes = ["cloud-platform"]
   }
 }
