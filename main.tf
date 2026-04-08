@@ -53,13 +53,13 @@ echo "complete -o default -F __start_kubectl k" >> /root/.bashrc
 echo "===== [4/6] Instalando Kind ====="
 KIND_VERSION="v0.23.0"
 curl -Lo /usr/local/bin/kind \
-  https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64
+  https://kind.sigs.k8s.io/dl/$${KIND_VERSION}/kind-linux-amd64
 chmod +x /usr/local/bin/kind
 
 echo "===== [5/6] Instalando istioctl v1.29 ====="
 ISTIO_VERSION="1.29.0"
 curl -L https://istio.io/downloadIstio | ISTIO_VERSION=$ISTIO_VERSION TARGET_ARCH=x86_64 sh -
-mv /root/istio-${ISTIO_VERSION}/bin/istioctl /usr/local/bin/istioctl
+mv /root/istio-$${ISTIO_VERSION}/bin/istioctl /usr/local/bin/istioctl
 chmod +x /usr/local/bin/istioctl
 istioctl completion bash > /etc/bash_completion.d/istioctl
 
@@ -94,7 +94,7 @@ istioctl install --set profile=demo -y
 kubectl label namespace default istio-injection=enabled
 
 # Desplegar Bookinfo
-ISTIO_PATH="/root/istio-${ISTIO_VERSION}"
+ISTIO_PATH="/root/istio-$${ISTIO_VERSION}"
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.29/samples/bookinfo/platform/kube/bookinfo.yaml
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.29/samples/bookinfo/networking/bookinfo-gateway.yaml
 
